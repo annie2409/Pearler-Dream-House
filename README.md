@@ -1,1 +1,1 @@
-# Pearler-Dream-House
+# Pearler calculator competition - Dream house distance calculator
