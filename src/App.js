@@ -1,11 +1,19 @@
-import logo from "./logo.svg";
 import "./App.css";
 import { DataForm } from "./components/DataForm";
+import { Container, Grid } from "semantic-ui-react";
 
 function App() {
   return (
     <div className="App">
-      <DataForm></DataForm>
+      <Container>
+        <Grid columns={1} divided>
+          <Grid.Row stretched>
+            <Grid.Column width={60}>
+              <DataForm />
+            </Grid.Column>
+          </Grid.Row>
+        </Grid>
+      </Container>
     </div>
   );
 }
