@@ -18,7 +18,7 @@ export const DataForm = (props) => {
       <Form.Field>
         <label>My household income per month</label>
         <input
-          type="text"
+          type="number"
           placeholder="Household income per month"
           {...register("Household income per month", {
             required: true,
@@ -29,23 +29,28 @@ export const DataForm = (props) => {
       <Form.Field>
         <label>My expense per month</label>
         <input
-          type="text"
-          placeholder="Last name"
-          {...register("Last name", { required: true, maxLength: 100 })}
+          type="number"
+          placeholder="Expense per month"
+          {...register("Expense per month", { required: true, maxLength: 100 })}
         />
       </Form.Field>
       <Form.Field>
+        <label>First deposit</label>
         <input
-          type="text"
-          placeholder="Email"
-          {...register("Email", { required: true, pattern: /^\S+@\S+$/i })}
+          type="number"
+          placeholder="First deposit"
+          {...register("Deposit", {
+            required: true,
+            pattern: /^\S+@\S+$/i,
+          })}
         />
       </Form.Field>
       <Form.Field>
+        <label>Target price</label>
         <input
-          type="tel"
-          placeholder="Mobile number"
-          {...register("Mobile number", {
+          type="number"
+          placeholder="Dream house cost"
+          {...register("Cost", {
             required: true,
             minLength: 6,
             maxLength: 12,
