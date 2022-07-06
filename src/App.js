@@ -8,7 +8,7 @@ function App() {
       <Container>
         <Grid columns={1} divided>
           <Grid.Row stretched>
-            <Grid.Column width={60}>
+            <Grid.Column width={16}>
               <DataForm />
             </Grid.Column>
           </Grid.Row>
