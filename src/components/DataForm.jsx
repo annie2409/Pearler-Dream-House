@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState } from "react";
 import Select from "react-select";
 import { useForm, Controller } from "react-hook-form";
 import { FormFieldHeader } from "./FormFieldHeader";
@@ -11,18 +11,32 @@ export const DataForm = (props) => {
     handleSubmit,
     formState: { errors },
   } = useForm();
-  const onSubmit = (data) => console.log(data);
-  console.log(errors);
+
+  const [formData, setFormData] = useState("");
+
+  const onSubmit = (data) => {
+    setFormData({ data });
+  };
 
   return (
     <div className="main">
       <Form onSubmit={handleSubmit(onSubmit)}>
         <Form.Field>
+          <label>Current savings</label>
+          <input
+            type="number"
+            placeholder="Curring savings"
+            {...register("savings", {
+              required: true,
+            })}
+          />
+        </Form.Field>
+        <Form.Field>
           <label>My household income per month</label>
           <input
             type="number"
             placeholder="Household income per month"
-            {...register("Household income per month", {
+            {...register("income", {
               required: true,
             })}
           />
@@ -32,15 +46,15 @@ export const DataForm = (props) => {
           <input
             type="number"
             placeholder="Expense per month"
-            {...register("Expense per month", { required: true })}
+            {...register("expense", { required: true })}
           />
         </Form.Field>
         <Form.Field>
           <label>First deposit</label>
           <input
             type="number"
-            placeholder="First deposit"
-            {...register("Deposit", {
+            placeholder="First deposit planned to put in"
+            {...register("deposit", {
               required: true,
             })}
           />
@@ -50,7 +64,7 @@ export const DataForm = (props) => {
           <input
             type="number"
             placeholder="Dream house cost"
-            {...register("Cost", {
+            {...register("cost", {
               required: true,
             })}
           />
@@ -65,7 +79,7 @@ export const DataForm = (props) => {
       </Form.Field> */}
         <Button type="submit">Submit</Button>
       </Form>
-      <Chart />
+      <Chart data={formData} />
     </div>
   );
 };

@@ -8,7 +8,7 @@ import {
   Tooltip,
 } from "recharts";
 
-const data = [
+const fakeData = [
   {
     name: "Page A",
     uv: 4000,
@@ -53,13 +53,30 @@ const data = [
   },
 ];
 
-export const Chart = (props) => {
+const calculateData = (data) => {
+  console.log(data);
+  const d = new Date();
+  let currentMonth = d.getMonth();
+  console.log(currentMonth);
+
+  let result = [];
+  let initialData = data.data || null;
+  if (initialData) {
+    let currentMoney = initialData.savings || 0;
+    const target = initialData.cost || 0;
+    const goal = initialData.deposit || 0;
+    const income = initialData.income || 0;
+  }
+};
+
+export const Chart = ({ data }) => {
   console.log("add chart");
+  console.log(calculateData(data));
   return (
     <AreaChart
       width={500}
       height={400}
-      data={data}
+      data={fakeData}
       margin={{
         top: 10,
         right: 30,
