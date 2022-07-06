@@ -22,7 +22,6 @@ export const DataForm = (props) => {
           placeholder="Household income per month"
           {...register("Household income per month", {
             required: true,
-            maxLength: 80,
           })}
         />
       </Form.Field>
@@ -31,7 +30,7 @@ export const DataForm = (props) => {
         <input
           type="number"
           placeholder="Expense per month"
-          {...register("Expense per month", { required: true, maxLength: 100 })}
+          {...register("Expense per month", { required: true })}
         />
       </Form.Field>
       <Form.Field>
@@ -41,7 +40,6 @@ export const DataForm = (props) => {
           placeholder="First deposit"
           {...register("Deposit", {
             required: true,
-            pattern: /^\S+@\S+$/i,
           })}
         />
       </Form.Field>
@@ -52,33 +50,17 @@ export const DataForm = (props) => {
           placeholder="Dream house cost"
           {...register("Cost", {
             required: true,
-            minLength: 6,
-            maxLength: 12,
           })}
         />
       </Form.Field>
-      <Form.Field>
-        <input
-          {...register("Developer", { required: true })}
-          type="radio"
-          value="Yes"
-        />
-      </Form.Field>
-      <Form.Field>
-        <input
-          {...register("Developer", { required: true })}
-          type="radio"
-          value="No"
-        />
-      </Form.Field>
-      <Form.Field>
+      {/* <Form.Field>
         <select {...register("Title", { required: true })}>
           <option value="Mr">Mr</option>
           <option value="Mrs">Mrs</option>
           <option value="Miss">Miss</option>
           <option value="Dr">Dr</option>
         </select>
-      </Form.Field>
+      </Form.Field> */}
       <Button type="submit">Submit</Button>
     </Form>
   );
