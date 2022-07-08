@@ -35,7 +35,7 @@ export const DataForm = (props) => {
           <label>My household income per month</label>
           <input
             type="number"
-            placeholder="Household income per month"
+            placeholder="Household income per month (after tax)"
             {...register("income", {
               required: true,
             })}

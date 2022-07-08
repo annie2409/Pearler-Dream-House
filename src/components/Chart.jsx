@@ -6,6 +6,8 @@ import {
   YAxis,
   CartesianGrid,
   Tooltip,
+  Line,
+  ReferenceLine,
 } from "recharts";
 
 const fakeData = [
@@ -54,42 +56,93 @@ const fakeData = [
 ];
 
 const calculateData = (data) => {
-  const months = ['January', 'February', 'March', 'April', 'May', 'June', 'July', 'August', 'September', 'October', 'November', 'December'];; 
+  const months = [
+    "January",
+    "February",
+    "March",
+    "April",
+    "May",
+    "June",
+    "July",
+    "August",
+    "September",
+    "October",
+    "November",
+    "December",
+  ];
   const d = new Date();
   let currentMonth = d.getMonth();
-  let currentYear = d.getFullYear();
-  console.log(currentMonth);
+  let startYear = d.getFullYear();
 
   let result = [];
   let initialData = data.data || null;
   if (initialData) {
-    let currentMoney = initialData.savings || 0;
-    const target = initialData.cost || 0;
-    const goal = initialData.deposit || 0;
-    const income = initialData.income || 0;
-    const expense = initialData.expense || 0;
-    const growth = initialData.growth || 0;
-    const inflation = initialData.inflation || 8.0;
+    let currentMoney = parseInt(initialData.savings) || 0;
+    let target = parseInt(initialData.cost) || 0;
+    let goal = parseInt(initialData.deposit) || 0;
+    let income = parseInt(initialData.income) || 0;
+    let expense = parseInt(initialData.expense) || 0;
+    const growth = parseInt(initialData.growth) || 0;
+    const inflation = parseInt(initialData.inflation) || 8.0;
+
+    let month = months[currentMonth % months.length];
+    let year = startYear + Math.floor(currentMonth / 13);
+    let incomeEarned = income;
+    let expenseUsed = expense;
+
+    result.push({
+      name: `${month} ${year}`,
+      totalAsset: currentMoney,
+      depositTarget: goal,
+      income: incomeEarned,
+      expense: expenseUsed,
+    });
 
     while (currentMoney < target) {
-        dataPoint = {
-            name: 
-            totalAsset: currentMoney
+      let month = months[currentMonth % months.length];
+      let year = startYear + Math.floor(currentMonth / 13);
+      currentMoney = Math.floor(currentMoney - expense + income);
+      incomeEarned += income;
+      expenseUsed += expense;
 
-        }
+      const dataPoint = {
+        name: `${month} ${year}`,
+        totalAsset: currentMoney,
+        depositTarget: goal,
+        income: incomeEarned,
+        expense: expenseUsed,
+      };
+
+      result.push(dataPoint);
+
+      income = Math.floor(
+        (income + (income * growth) / 12 / 100) * (1 + inflation / 12 / 100)
+      );
+      expense = Math.floor(expense + expense * (inflation / 12 / 100));
+      target = Math.floor(target + target * (inflation / 12 / 100));
+      goal = Math.floor(goal + goal * (inflation / 12 / 100));
+      currentMonth++;
     }
+    return result;
   }
 };
 
 export const Chart = ({ data }) => {
-  console.log("add chart");
-  console.log(data);
-  console.log(calculateData(data));
+  let goalLine =
+    data && data.data && data.data.goal ? (
+      <ReferenceLine
+        y={parseInt(data.data.goal)}
+        label="First deposit"
+        stroke="red"
+      />
+    ) : (
+      <ReferenceLine />
+    );
   return (
     <AreaChart
       width={500}
       height={400}
-      data={fakeData}
+      data={calculateData(data)}
       margin={{
         top: 10,
         right: 30,
@@ -103,24 +156,25 @@ export const Chart = ({ data }) => {
       <Tooltip />
       <Area
         type="monotone"
-        dataKey="uv"
-        stackId="1"
+        dataKey="totalAsset"
         stroke="#8884d8"
         fill="#8884d8"
+        fillOpacity={0.4}
       />
+      {goalLine}
       <Area
         type="monotone"
-        dataKey="pv"
-        stackId="1"
-        stroke="#82ca9d"
-        fill="#82ca9d"
-      />
-      <Area
-        type="monotone"
-        dataKey="amt"
-        stackId="1"
+        dataKey="income"
         stroke="#ffc658"
         fill="#ffc658"
+        fillOpacity={0.3}
+      />
+      <Area
+        type="monotone"
+        dataKey="expense"
+        stroke="#82ca9d"
+        fill="#82ca9d"
+        fillOpacity={0.3}
       />
     </AreaChart>
   );
