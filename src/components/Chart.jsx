@@ -54,9 +54,10 @@ const fakeData = [
 ];
 
 const calculateData = (data) => {
-  console.log(data);
+  const months = ['January', 'February', 'March', 'April', 'May', 'June', 'July', 'August', 'September', 'October', 'November', 'December'];; 
   const d = new Date();
   let currentMonth = d.getMonth();
+  let currentYear = d.getFullYear();
   console.log(currentMonth);
 
   let result = [];
@@ -66,11 +67,23 @@ const calculateData = (data) => {
     const target = initialData.cost || 0;
     const goal = initialData.deposit || 0;
     const income = initialData.income || 0;
+    const expense = initialData.expense || 0;
+    const growth = initialData.growth || 0;
+    const inflation = initialData.inflation || 8.0;
+
+    while (currentMoney < target) {
+        dataPoint = {
+            name: 
+            totalAsset: currentMoney
+
+        }
+    }
   }
 };
 
 export const Chart = ({ data }) => {
   console.log("add chart");
+  console.log(data);
   console.log(calculateData(data));
   return (
     <AreaChart

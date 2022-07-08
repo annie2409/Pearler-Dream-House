@@ -42,6 +42,18 @@ export const DataForm = (props) => {
           />
         </Form.Field>
         <Form.Field>
+          <label>Income growth %</label>
+          <input
+            type="number"
+            placeholder="Income grwoth %"
+            {...register("growth", {
+              required: true,
+              min: 0,
+              max: 100,
+            })}
+          />
+        </Form.Field>
+        <Form.Field>
           <label>My expense per month</label>
           <input
             type="number"
@@ -66,6 +78,18 @@ export const DataForm = (props) => {
             placeholder="Dream house cost"
             {...register("cost", {
               required: true,
+            })}
+          />
+        </Form.Field>
+        <Form.Field>
+          <label>Inflation %</label>
+          <input
+            type="number"
+            placeholder="Inflation"
+            {...register("inflation", {
+              required: true,
+              min: 0,
+              max: 100,
             })}
           />
         </Form.Field>
