@@ -10,51 +10,6 @@ import {
   ReferenceLine,
 } from "recharts";
 
-const fakeData = [
-  {
-    name: "Page A",
-    uv: 4000,
-    pv: 2400,
-    amt: 2400,
-  },
-  {
-    name: "Page B",
-    uv: 3000,
-    pv: 1398,
-    amt: 2210,
-  },
-  {
-    name: "Page C",
-    uv: 2000,
-    pv: 9800,
-    amt: 2290,
-  },
-  {
-    name: "Page D",
-    uv: 2780,
-    pv: 3908,
-    amt: 2000,
-  },
-  {
-    name: "Page E",
-    uv: 1890,
-    pv: 4800,
-    amt: 2181,
-  },
-  {
-    name: "Page F",
-    uv: 2390,
-    pv: 3800,
-    amt: 2500,
-  },
-  {
-    name: "Page G",
-    uv: 3490,
-    pv: 4300,
-    amt: 2100,
-  },
-];
-
 const calculateData = (data) => {
   const months = [
     "January",
@@ -98,7 +53,9 @@ const calculateData = (data) => {
       expense: expenseUsed,
     });
 
-    while (currentMoney < target) {
+    let limit = 0;
+    while (currentMoney < target && limit < 360) {
+      // 12 * 30 years
       let month = months[currentMonth % months.length];
       let year = startYear + Math.floor(currentMonth / 13);
       currentMoney = Math.floor(currentMoney - expense + income);
@@ -115,9 +72,7 @@ const calculateData = (data) => {
 
       result.push(dataPoint);
 
-      income = Math.floor(
-        (income + (income * growth) / 12 / 100) * (1 + inflation / 12 / 100)
-      );
+      income = Math.floor(income + income * (growth / 12 / 100));
       expense = Math.floor(expense + expense * (inflation / 12 / 100));
       target = Math.floor(target + target * (inflation / 12 / 100));
       goal = Math.floor(goal + goal * (inflation / 12 / 100));
