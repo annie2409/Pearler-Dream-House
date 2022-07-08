@@ -6,7 +6,7 @@ import {
   YAxis,
   CartesianGrid,
   Tooltip,
-  Line,
+  ResponsiveContainer,
   ReferenceLine,
 } from "recharts";
 
@@ -138,44 +138,52 @@ export const Chart = ({ data }) => {
     ) : (
       <ReferenceLine />
     );
-  return (
-    <AreaChart
-      width={500}
-      height={400}
-      data={calculateData(data)}
-      margin={{
-        top: 10,
-        right: 30,
-        left: 0,
-        bottom: 0,
-      }}
-    >
-      <CartesianGrid strokeDasharray="3 3" />
-      <XAxis dataKey="name" />
-      <YAxis />
-      <Tooltip />
-      <Area
-        type="monotone"
-        dataKey="totalAsset"
-        stroke="#8884d8"
-        fill="#8884d8"
-        fillOpacity={0.4}
-      />
-      {goalLine}
-      <Area
-        type="monotone"
-        dataKey="income"
-        stroke="#ffc658"
-        fill="#ffc658"
-        fillOpacity={0.3}
-      />
-      <Area
-        type="monotone"
-        dataKey="expense"
-        stroke="#82ca9d"
-        fill="#82ca9d"
-        fillOpacity={0.3}
-      />
-    </AreaChart>
-  );
+  if (data && data.data) {
+    return (
+      <div className="chart">
+        <ResponsiveContainer width="100%" height="100%">
+          <AreaChart
+            width={500}
+            height={400}
+            data={calculateData(data)}
+            margin={{
+              top: 10,
+              right: 30,
+              left: 0,
+              bottom: 0,
+            }}
+          >
+            <CartesianGrid strokeDasharray="3 3" />
+            <XAxis dataKey="name" />
+            <YAxis />
+            <Tooltip />
+            <Area
+              type="monotone"
+              dataKey="totalAsset"
+              stroke="#8884d8"
+              fill="#8884d8"
+              fillOpacity={0.4}
+            />
+            {goalLine}
+            <Area
+              type="monotone"
+              dataKey="income"
+              stroke="#ffc658"
+              fill="#ffc658"
+              fillOpacity={0.3}
+            />
+            <Area
+              type="monotone"
+              dataKey="expense"
+              stroke="#82ca9d"
+              fill="#82ca9d"
+              fillOpacity={0.3}
+            />
+          </AreaChart>
+        </ResponsiveContainer>
+      </div>
+    );
+  } else {
+    return <div></div>;
+  }
 };

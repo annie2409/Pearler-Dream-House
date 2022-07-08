@@ -1,16 +1,38 @@
 .App {
   margin: auto;
-  width: 50%;
+  width: 80%;
   height: 100%;
-  border: 3px solid green;
-  padding: 10px;
   font-family: sans-serif;
     text-align: center;
+    color: white;
+}
+
+body {
+  background-color: black;
 }
 
 input {
-  width: 100%;
-  min-width: 300px;
-    max-width: 600px;
+    border-radius: 15px;
     display: -webkit-flex;
+    width: 100%;
+    text-align: right;
+    color: black;
+}
+
+button {
+    background-color: #f7b31c;
+    /* Fill color */
+    color: white;
+    /* Text color */
+    border-radius: 15px;
+    /* Rounded button edges */
+    font-style: italic;
+    /* Italicize text */
+    padding: 10px 30px;
+    /* Distance between text and border */
+}
+
+.chart {
+  width: 800px;
+  height: 600px;
 }

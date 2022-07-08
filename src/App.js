@@ -5,6 +5,7 @@ import { Container, Grid } from "semantic-ui-react";
 function App() {
   return (
     <div className="App">
+      <h1>Calculate how far you are away from buying a house!</h1>
       <Container>
         <Grid columns={1} divided>
           <Grid.Row stretched>

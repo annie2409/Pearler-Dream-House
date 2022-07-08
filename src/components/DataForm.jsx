@@ -1,8 +1,6 @@
 import React, { useState } from "react";
-import Select from "react-select";
-import { useForm, Controller } from "react-hook-form";
-import { FormFieldHeader } from "./FormFieldHeader";
-import { Button, Checkbox, Form } from "semantic-ui-react";
+import { useForm } from "react-hook-form";
+import { Button, Form } from "semantic-ui-react";
 import { Chart } from "./Chart";
 
 export const DataForm = (props) => {
