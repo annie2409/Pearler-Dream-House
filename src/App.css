@@ -33,9 +33,10 @@ button {
 }
 
 .chart {
-  width: 900px;
+  width: 1000px;
   height: 500px;
   align-items: stretch;
   display: flex;
   margin: auto;
+  padding: -30px;
 }

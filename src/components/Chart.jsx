@@ -8,22 +8,23 @@ import {
   Tooltip,
   ResponsiveContainer,
   ReferenceLine,
+  Label,
 } from "recharts";
 
 const calculateData = (data) => {
   const months = [
-    "January",
-    "February",
-    "March",
-    "April",
+    "Jan",
+    "Feb",
+    "Mar",
+    "Apr",
     "May",
-    "June",
-    "July",
-    "August",
-    "September",
-    "October",
-    "November",
-    "December",
+    "Jun",
+    "Jul",
+    "Aug",
+    "Sep",
+    "Oct",
+    "Nov",
+    "Dec",
   ];
   const d = new Date();
   let currentMonth = d.getMonth();
@@ -47,10 +48,10 @@ const calculateData = (data) => {
 
     result.push({
       name: `${month} ${year}`,
-      totalAsset: currentMoney,
-      depositTarget: goal,
-      income: incomeEarned,
-      expense: expenseUsed,
+      totalAsset: Math.floor(currentMoney / 1000),
+      depositTarget: Math.floor(goal / 1000),
+      income: Math.floor(incomeEarned / 1000),
+      expense: Math.floor(expenseUsed / 1000),
     });
 
     let limit = 0;
@@ -64,10 +65,10 @@ const calculateData = (data) => {
 
       const dataPoint = {
         name: `${month} ${year}`,
-        totalAsset: currentMoney,
-        depositTarget: goal,
-        income: incomeEarned,
-        expense: expenseUsed,
+        totalAsset: Math.floor(currentMoney / 1000),
+        depositTarget: Math.floor(goal / 1000),
+        income: Math.floor(incomeEarned / 1000),
+        expense: Math.floor(expenseUsed / 1000),
       };
 
       result.push(dataPoint);
@@ -77,6 +78,7 @@ const calculateData = (data) => {
       target = Math.floor(target + target * (inflation / 12 / 100));
       goal = Math.floor(goal + goal * (inflation / 12 / 100));
       currentMonth++;
+      limit++;
     }
     return result;
   }
@@ -98,19 +100,30 @@ export const Chart = ({ data }) => {
       <div className="chart">
         <ResponsiveContainer width="100%" height="100%">
           <AreaChart
-            width={500}
+            width={800}
             height={400}
             data={calculateData(data)}
             margin={{
               top: 10,
-              right: 30,
-              left: 0,
+              right: 0,
+              left: 10,
               bottom: 0,
             }}
           >
             <CartesianGrid strokeDasharray="3 3" />
             <XAxis dataKey="name" />
-            <YAxis />
+            <YAxis>
+              <Label
+                style={{
+                  textAnchor: "middle",
+                  fontSize: "70%",
+                  fill: "white",
+                }}
+                angle={270}
+                value={"$ (thousands)"}
+                position="left"
+              />
+            </YAxis>
             <Tooltip />
             <Area
               type="monotone"
