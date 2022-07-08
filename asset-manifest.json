@@ -1,0 +1,15 @@
+{
+  "files": {
+    "main.css": "/Pearler-Dream-House-Distance-Calculator/static/css/main.3ca1eb06.css",
+    "main.js": "/Pearler-Dream-House-Distance-Calculator/static/js/main.53bde017.js",
+    "static/js/787.cb83dcd1.chunk.js": "/Pearler-Dream-House-Distance-Calculator/static/js/787.cb83dcd1.chunk.js",
+    "index.html": "/Pearler-Dream-House-Distance-Calculator/index.html",
+    "main.3ca1eb06.css.map": "/Pearler-Dream-House-Distance-Calculator/static/css/main.3ca1eb06.css.map",
+    "main.53bde017.js.map": "/Pearler-Dream-House-Distance-Calculator/static/js/main.53bde017.js.map",
+    "787.cb83dcd1.chunk.js.map": "/Pearler-Dream-House-Distance-Calculator/static/js/787.cb83dcd1.chunk.js.map"
+  },
+  "entrypoints": [
+    "static/css/main.3ca1eb06.css",
+    "static/js/main.53bde017.js"
+  ]
+}
